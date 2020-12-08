@@ -14,11 +14,11 @@ pipeline{
 				bat "docker-compose up flights-chrome flights-firefox"
 			}
 		}
-		stage('Bring Grid Down')
-		{
-			steps{
-				bat "docker-compose down"
-			}
+	}
+	post{
+		always{
+			archiveArtifacts artifacts: "output/**"
+			bat "docker-compose down"
 		}
 	}
 
